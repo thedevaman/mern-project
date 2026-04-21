@@ -18,11 +18,11 @@ app.post("/add-task",async(req,res)=>{
 })
 
 
-// app.get('/',(req,res)=>{
-//   res.send({
-//     message:"basic Api Done",
-//     success:true
-//   })
-// })
+app.get('/',(req,res)=>{
+  res.send({
+    message:"basic Api Done",
+    success:true
+  })
+})
 
 app.listen(3200)

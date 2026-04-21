@@ -1,17 +1,51 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../style/addtask.css'
 
 function AddTask() {
+
+  const [task, setTask] = useState();
+
+  const onTaskInput = (e) => {
+    const input = e.target
+    const name = input.name
+    const value = input.value
+    setTask(prev => ({
+      ...prev, [name]: value
+    }))
+  }
+
+  const handleTask = async () => {
+    // e.preventDefault()
+
+
+    let result = await fetch('localhost:3200/add-task', {
+      method: 'POST',
+      body: JSON.stringify(task),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+
+    result = await result.json()
+    if (result) {
+      alert('Task added successfully')
+    }
+
+
+  }
+
+
   return (
     <div className='container'>
-        <h1>Add New Task</h1>
-      <form>
-        <label htmlFor=''>Title</label>
-        <input type='text' name='title' placeholder="Enter task title" />
-        <label htmlFor=''>Description</label>
-        <textarea rows={4} name='description' placeholder='Enter New Description'></textarea>
-        <button className='submit'>Add New Task</button>
-      </form>
+      <h1>Add New Task</h1>
+      {JSON.stringify(task)}
+      {/* <form> */}
+      <label htmlFor=''>Title</label>
+      <input onChange={onTaskInput} type='text' name='title' placeholder="Enter task title" />
+      <label htmlFor=''>Description</label>
+      <textarea onChange={onTaskInput} rows={4} name='description' placeholder='Enter New Description'></textarea>
+      <button onClick={handleTask} className='submit'>Add New Task</button>
+      {/* </form> */}
     </div>
   )
 }
