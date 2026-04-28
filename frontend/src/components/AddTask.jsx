@@ -18,7 +18,7 @@ function AddTask() {
     // e.preventDefault()
 
 
-    let result = await fetch('localhost:3200/add-task', {
+    let result = await fetch('http://localhost:3200/add-task', {
       method: 'POST',
       body: JSON.stringify(task),
       headers: {
