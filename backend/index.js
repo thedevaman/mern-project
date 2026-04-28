@@ -21,6 +21,18 @@ app.post("/add-task",async(req,res)=>{
   }
 })
 
+app.get("/task",async(req,res)=>{
+  const db = await connection();
+  const collection = await db.collection(collectionName);
+  const result = await collection.find().toArray();
+  if(result)
+  {
+    res.send({message:"Task List Fetched!",success:true,result})
+  }else{
+    res.send({message:"Something went wrong!",success:false,result})
+  }
+})
+
 
 app.get('/',(req,res)=>{
   res.send({
