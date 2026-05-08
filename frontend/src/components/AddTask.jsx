@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import '../style/addtask.css'
+import { useNavigate } from 'react-router-dom'
 
 function AddTask() {
 
   const [task, setTask] = useState();
+  const navigate = useNavigate()
 
   const onTaskInput = (e) => {
     const input = e.target
@@ -29,6 +31,7 @@ function AddTask() {
     result = await result.json()
     if (result) {
       alert('Task added successfully')
+      navigate('/')
     }
 
 

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import "../style/list.css"
 
 function TaskList() {
 
@@ -18,16 +19,20 @@ function TaskList() {
     }, [])
 
     return (
-        <div className='container'>
-            <h1>List of Tasks</h1>
-            <p>Todo List</p>
-            {task.map((item, index) => (
-                <div key={index}>
-                    <h3>{item.title}</h3>
-                    <p>{item.description}</p>
-                </div>
-            ))}
-
+        <div>
+            <h1>To Do List</h1>
+            <ul className='task-list'>
+                <li className='list-header'>S.No.</li>
+                <li className='list-header'>Title</li>
+                <li className='list-header'>Description</li>
+                {task.map((item, index) => (
+                    <>
+                        <li className='list-item'>{index + 1}</li>
+                        <li className='list-item'>{item.title}</li>
+                        <li className='list-item'>{item.description}</li>
+                    </>
+                ))}
+            </ul>
         </div>
     )
 }
