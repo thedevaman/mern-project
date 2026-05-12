@@ -1,6 +1,7 @@
 import express from 'express'
 import { collectionName, connection } from './dbconfig.js';
 import cors from 'cors'
+import { ObjectId } from 'mongodb';
 
 
 const app = express();
@@ -33,6 +34,19 @@ app.get("/task",async(req,res)=>{
   }
 })
 
+
+app.delete("/delete-task/:id",async(req,res)=>{
+  const db = await connection();
+  const id = req.params.id
+  const collection = await db.collection(collectionName);
+  const result = await collection.deleteOne({_id:new ObjectId(id)});
+  if(result)
+  {
+    res.send({message:"Task Deleted!",success:true,result})
+  }else{
+    res.send({message:"Something went wrong!",success:false,result})
+  }
+})
 
 app.get('/',(req,res)=>{
   res.send({
