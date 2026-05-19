@@ -41,7 +41,7 @@ function AddTask() {
   return (
     <div className='container'>
       <h1>Add New Task</h1>
-      {JSON.stringify(task)}
+      {/* {JSON.stringify(task)} */}
       {/* <form> */}
       <label htmlFor=''>Title</label>
       <input onChange={onTaskInput} type='text' name='title' placeholder="Enter task title" />
