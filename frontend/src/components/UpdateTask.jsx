@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 
 function UpdateTask() {
 
-    const [task, setTask] = useState();
+    const [task, setTask] = useState('');
     const { id } = useParams()
 
     useEffect(() => {
