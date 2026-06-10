@@ -32,21 +32,41 @@ function TaskList() {
     }
 
     const selectAll = (event)=>{
-     console.log(event.target.checked)
+         console.log(event.target.checked)
+    
+     if(event.target.checked)
+     {
+        let items = task.map((item)=>item._id)
+       setSelect(items)
+     }else{
+        setSelect([])
+     }
     }
+
+    const selectSingleItem = (id) =>{
+    
+     if(selectedTask.includes(id)){
+        let items = selectedTask.filter((item)=>item!=id)
+        setSelect(items)
+    }else{
+        setSelect(id,...selectedTask)
+    }
+
+    console.log(selectedTask)
+}
 
     return (
         <div>
             <h1>To Do List</h1>
             <ul className='task-list'>
-                <li className='list-header'><input type="checkbox" /></li>
+                <li className='list-header'><input onChange={selectAll} type="checkbox" /></li>
                 <li className='list-header'>S.No.</li>
                 <li className='list-header'>Title</li>
                 <li className='list-header'>Description</li>
                 <li className='list-header'>Actions</li>
                 {task.map((item, index) => (
                     <Fragment key={index}>
-                         <li className='list-item'><input onChange={selectAll} type="checkbox" /></li>
+                         <li className='list-item'><input onChange={()=>selectSingleItem(item._id)} checked={selectedTask.includes(item._id)}  type="checkbox" /></li>
                         <li className='list-item'>{index + 1}</li>
                         <li className='list-item'>{item.title}</li>
                         <li className='list-item'>{item.description}</li>
